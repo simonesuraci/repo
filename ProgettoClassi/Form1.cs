@@ -26,6 +26,7 @@ namespace ProgettoClassi
             gunnarson.attack(pepe);
             pepe.attack(gunnarson);
             gunnarson.heal();
+            gunnarson.curHp = 20;
             pepe.heal(gunnarson);
             gunnarson.attack(pepe);
             gunnarson.attack(pepe);
