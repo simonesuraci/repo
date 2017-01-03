@@ -11,20 +11,11 @@ namespace ProgettoClassi
     {
         private string _name; 
         public string name
-        {
-            get
-            {
-                return _name;
-            }
-        }  
+        { get { return _name;}}  
         private int _maxHp; 
         public int maxHp 
-        {
-            get 
-            { 
-                 return _maxHp; 
-            } 
-        } 
+        { get { return _maxHp; } }
+        public bool alive { get { return curHp > 0; } }
         private int _curHp; 
         public int curHp
         { 
@@ -37,16 +28,34 @@ namespace ProgettoClassi
                 else if (value > _maxHp)
                 {
                     value = _maxHp;
-                    curHp = value;
+                    _curHp = value;
                 }     
             }  
             get 
-            { 
-                return _curHp; 
-            } 
-        } 
-        public int damage;
-        public int healFactor;
+            { return _curHp; } 
+        }
+        private int _damage;
+        public int damage { get { return _damage; } }
+        private int _healFactor;
+        public int healFactor {
+            get
+            {
+                return _healFactor;
+            }
+            set
+            {
+                _healFactor = value;
+            }
+
+        }
+
+        public string status
+        {
+            get
+            {
+                return curHp + "/" + maxHp + "HP";
+            }
+        }
         public Monster(string name, int maxHp, int damage , int healFactor = 0)
         {
             _name = name;
@@ -56,16 +65,18 @@ namespace ProgettoClassi
                 _maxHp = maxHp;
             }
             curHp = maxHp;
-            this.damage = damage;
+            if (damage < 0) damage = 0;
+            _damage = damage;
             this.healFactor = healFactor;
+            Console.WriteLine("test " + _healFactor);
             describe();
         }
 
         public string describe()
         {
-            string output = "Questo è" + name + "r/n";
-            output += "HP" + _curHp + "r/n";
-            output += "DAMAGE" + damage + "r/n";
+            string output = "Questo è " + name + "\r\n";
+            output += "HP " + curHp + "\r\n";
+            output += "DAMAGE " + damage + "\r\n";
             return output;
         }
 
@@ -81,23 +92,23 @@ namespace ProgettoClassi
                 return;
             }
 
-            if (_curHp <= 0)
+            if (curHp <= 0)
             {
                 Console.WriteLine("Non puoi curare nessuno da morto");
                 return;
             }
 
-            if (target._curHp <= 0)
+            if (target.curHp <= 0)
             {
                 Console.WriteLine(target.name + " è esausto e non puoi resuscitarlo con la cura.");
                 return;
             }
 
-            target._curHp += healFactor;
+            target.curHp += healFactor;
 
-            if (target._curHp > target._maxHp)
+            if (target.curHp > target.maxHp)
             {
-                target._curHp = target._maxHp;
+                target.curHp = target.maxHp;
             }
 
             Console.WriteLine(name + " usa cura su " + target.name);
@@ -109,29 +120,29 @@ namespace ProgettoClassi
             heal(this);
         }
 
-        public void attack(Monster target)
+        public virtual void attack(Monster target)
         {
-            if (target._curHp <= 0)
+            if (!alive)
             {
-                Console.WriteLine("Non puoi attaccare nessuno da morto a meno che tu non sia uno zombie");
+                Console.WriteLine("Non puoi attaccare nessuno da morto");
                 return;
             }
-            if (target._curHp <= 0)
+            if (!target.alive)
             {
                 Console.WriteLine(target.name + " è già esasuto, non infierire");
                 return;
             }
             Console.WriteLine(name + " attacca " + target.name);
             Console.WriteLine(name + " fa " + damage + " danni a "  + target.name);
-            target._curHp -= damage;
-            if (target._curHp <= 0)
+            target.curHp -= damage;
+            if (!target.alive)
             {
-                target._curHp = 0;
+                target.curHp = 0;
                 Console.WriteLine(target.name + " è esausto");
             }
             else
             {
-                Console.WriteLine("a " + target.name + " rimangono " + target._curHp + "/" + target._maxHp);
+                Console.WriteLine("a " + target.name + " rimangono " + target.curHp + "/" + target._maxHp);
             }
         }
     }
