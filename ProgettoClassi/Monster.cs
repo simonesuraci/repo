@@ -27,12 +27,11 @@ namespace ProgettoClassi
                 }
                 else if (value > _maxHp)
                 {
-                    value = _maxHp;
-                    _curHp = value;
-                }     
+                    value = _maxHp;        
+                }
+                _curHp = value;
             }  
-            get 
-            { return _curHp; } 
+            get { return _curHp; } 
         }
         private int _damage;
         public int damage { get { return _damage; } }
@@ -62,8 +61,8 @@ namespace ProgettoClassi
             if (maxHp < 1) 
             {
                 maxHp = 1;
-                _maxHp = maxHp;
             }
+            _maxHp = maxHp;
             curHp = maxHp;
             if (damage < 0) damage = 0;
             _damage = damage;
@@ -112,7 +111,7 @@ namespace ProgettoClassi
             }
 
             Console.WriteLine(name + " usa cura su " + target.name);
-            Console.WriteLine(target.name + " è stato curato e ora ha " + target._curHp + "/" + target._maxHp + " HP");
+            Console.WriteLine(target.name + " è stato curato e ora ha " + target.status);
         }
 
         public void heal()
@@ -142,7 +141,7 @@ namespace ProgettoClassi
             }
             else
             {
-                Console.WriteLine("a " + target.name + " rimangono " + target.curHp + "/" + target._maxHp);
+                Console.WriteLine("a " + target.name + " rimangono " + target.curHp + "/" + target.maxHp);
             }
         }
     }
