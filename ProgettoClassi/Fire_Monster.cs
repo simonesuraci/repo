@@ -9,6 +9,7 @@ namespace ProgettoClassi
     class Fire_Monster : Monster
     {
         public int fireDamage { get; set; }
+
         public Fire_Monster(string name, int maxHp, int damage, int fireDamage) : base(name, maxHp, damage, 0)
         {
             this.fireDamage = fireDamage;

@@ -1,35 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProgettoClassi;
+using System.Collections.Generic;
 
 namespace ProgettoClassi
 {
     public partial class Form1 : Form
     {
+        List<Monster> monsters ;
+
         public Form1()
         {
             InitializeComponent();
+            string startDirectory = @"C:\Users\computer\Desktop\repo\Progetto";
+            Environment.CurrentDirectory = (startDirectory);
+            monsters = Deserializer.deserializeMonster();
+            Console.WriteLine(monsters[0].describe());
+        }
+
+        private Monster addMonster(Monster m)
+        {
+            monsters.Add(m);
+            return m;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Monster gunnarson = new Monster("Gunnarson", 100, 20);
-            Monster pepe = new Monster("Pepe", 60, 20, 10);
-
-            gunnarson.attack(pepe);
-            pepe.attack(gunnarson);
-            gunnarson.heal();
-            gunnarson.curHp = 20;
-            pepe.heal(gunnarson);
-            gunnarson.attack(pepe);
-            gunnarson.attack(pepe);
+            addMonster(new Monster("tizio", 200, 100));
+            //Console.WriteLine(monsters[0].describe());
         }
+
+       
+        
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProgettoClassi
@@ -10,12 +6,13 @@ namespace ProgettoClassi
     class Monster
     {
         private string _name; 
-        public string name
-        { get { return _name;}}  
+        public string name  { get { return _name; } }
+
         private int _maxHp; 
-        public int maxHp 
-        { get { return _maxHp; } }
+        public int maxHp { get { return _maxHp; } }
+
         public bool alive { get { return curHp > 0; } }
+
         private int _curHp; 
         public int curHp
         { 
@@ -35,6 +32,7 @@ namespace ProgettoClassi
         }
         private int _damage;
         public int damage { get { return _damage; } }
+
         private int _healFactor;
         public int healFactor {
             get
@@ -55,19 +53,24 @@ namespace ProgettoClassi
                 return curHp + "/" + maxHp + "HP";
             }
         }
+
         public Monster(string name, int maxHp, int damage , int healFactor = 0)
         {
             _name = name;
+
             if (maxHp < 1) 
             {
                 maxHp = 1;
             }
             _maxHp = maxHp;
+
             curHp = maxHp;
+
             if (damage < 0) damage = 0;
             _damage = damage;
+
             this.healFactor = healFactor;
-            Console.WriteLine("test " + _healFactor);
+           
             describe();
         }
 
@@ -126,14 +129,16 @@ namespace ProgettoClassi
                 Console.WriteLine("Non puoi attaccare nessuno da morto");
                 return;
             }
+
             if (!target.alive)
             {
-                Console.WriteLine(target.name + " è già esasuto, non infierire");
+                Console.WriteLine(target.name + " è già esausto, non infierire");
                 return;
             }
             Console.WriteLine(name + " attacca " + target.name);
             Console.WriteLine(name + " fa " + damage + " danni a "  + target.name);
             target.curHp -= damage;
+
             if (!target.alive)
             {
                 target.curHp = 0;
@@ -141,7 +146,7 @@ namespace ProgettoClassi
             }
             else
             {
-                Console.WriteLine("a " + target.name + " rimangono " + target.curHp + "/" + target.maxHp);
+                Console.WriteLine("a " + target.name + " rimangono " + target.curHp + " hp");
             }
         }
     }
