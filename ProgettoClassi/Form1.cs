@@ -8,14 +8,18 @@ namespace ProgettoClassi
 {
     public partial class Form1 : Form
     {
-        List<Monster> monsters ;
+        private List<Monster> monsters;
 
         public Form1()
         {
             InitializeComponent();
-            string startDirectory = @"C:\Users\computer\Desktop\repo\Progetto";
-            Environment.CurrentDirectory = (startDirectory);
             monsters = Deserializer.deserializeMonster();
+            Console.WriteLine(monsters[0].describe());
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            addMonster(new Monster("tizio", 200, 100));
             Console.WriteLine(monsters[0].describe());
         }
 
@@ -24,14 +28,5 @@ namespace ProgettoClassi
             monsters.Add(m);
             return m;
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            addMonster(new Monster("tizio", 200, 100));
-            //Console.WriteLine(monsters[0].describe());
-        }
-
-       
-        
     }
 }

@@ -10,9 +10,9 @@ namespace ProgettoClassi
     static class Deserializer
     {
         #if DEBUG
-            private static string path = @".\Debug\monsters.csv";
+            private static string path = @"..\..\monsters.csv";
         #else
-            private static string path = @".\Release\monsters.csv";
+            private static string path = @"..\Release\monsters.csv";
         #endif
 
         public static List<Monster> deserializeMonster()
