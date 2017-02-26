@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ProgettoClassi
@@ -46,6 +47,8 @@ namespace ProgettoClassi
 
         }
 
+        public Image image { get; set; }
+
         public string status
         {
             get
@@ -57,6 +60,7 @@ namespace ProgettoClassi
         public Monster(string name, int maxHp, int damage , int healFactor = 0)
         {
             _name = name;
+            image = Image.FromFile(assets.getImagePath(name));
 
             if (maxHp < 1) 
             {

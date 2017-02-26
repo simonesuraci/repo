@@ -14,13 +14,12 @@ namespace ProgettoClassi
         {
             InitializeComponent();
             monsters = Deserializer.deserializeMonster();
-            Console.WriteLine(monsters[0].describe());
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            addMonster(new Monster("tizio", 200, 100));
-            Console.WriteLine(monsters[0].describe());
+            renderMonster(curMonsterIndex);
         }
 
         private Monster addMonster(Monster m)
@@ -28,5 +27,26 @@ namespace ProgettoClassi
             monsters.Add(m);
             return m;
         }
+
+        private int curMonsterIndex = 0;
+        private void prevButt_Click(object sender, EventArgs e)
+        {
+            if (curMonsterIndex == 0) return;
+            curMonsterIndex--;
+            renderMonster(curMonsterIndex);
+        }
+
+        private void nextButt_Click(object sender, EventArgs e)
+        {
+            if (curMonsterIndex == monsters.Count - 1) return;
+            curMonsterIndex++;
+            renderMonster(curMonsterIndex);
+        }
+
+        private void renderMonster(int monsterIndex)
+        {
+            enemyImg.Image = monsters[monsterIndex].image;
+        }
+
     }
 }

@@ -9,35 +9,27 @@ namespace ProgettoClassi
 {
     static class Deserializer
     {
-        #if DEBUG
-            private static string path = @"..\..\monsters.csv";
-        #else
-            private static string path = @"..\Release\monsters.csv";
-        #endif
-
         public static List<Monster> deserializeMonster()
         {
             List<Monster> monsters = new List<Monster>();
 
-            string[] data = File.ReadAllLines(path);
+            string[] data = File.ReadAllLines(assets.assetsPath + "monsters.csv");
             int l = data.Length;
             for (int i = 1; i < l; i++)
             {
-                string[] splitterData = data[i].Split(',');
-                switch (splitterData[0].ToUpper())
+                string[] splittedData = data[i].Split(',');
+                switch (splittedData[0].ToUpper())
                 {
                     case "MONSTER":
-                        monsters.Add(new Monster(splitterData[1], int.Parse(splitterData[2]), int.Parse(splitterData[3]), int.Parse(splitterData[4])));
+                        monsters.Add(new Monster(splittedData[1], int.Parse(splittedData[2]), int.Parse(splittedData[3]), int.Parse(splittedData[4])));
                         break;
                     case "FIRE":
-                        monsters.Add(new Fire_Monster(splitterData[1], int.Parse(splitterData[2]), int.Parse(splitterData[3]), int.Parse(splitterData[4])));
+                        monsters.Add(new Fire_Monster(splittedData[1], int.Parse(splittedData[2]), int.Parse(splittedData[3]), int.Parse(splittedData[4])));
                         break;
                 }
-                Console.WriteLine(splitterData[0]);
             }
 
             return monsters;
         }
-
     }
 }
