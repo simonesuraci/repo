@@ -14,12 +14,13 @@ namespace ProgettoClassi
         {
             InitializeComponent();
             monsters = Deserializer.deserializeMonster();
-            
+            listView1.Items.Add(new ListViewItem("prova"));
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            renderMonster(curMonsterIndex);
+            renderMonster(monsters[curMonsterIndex]);
+            renderMonster(monsters[0], false);
         }
 
         private Monster addMonster(Monster m)
@@ -33,20 +34,47 @@ namespace ProgettoClassi
         {
             if (curMonsterIndex == 0) return;
             curMonsterIndex--;
-            renderMonster(curMonsterIndex);
+            renderMonster(monsters[curMonsterIndex]);
         }
 
         private void nextButt_Click(object sender, EventArgs e)
         {
             if (curMonsterIndex == monsters.Count - 1) return;
             curMonsterIndex++;
-            renderMonster(curMonsterIndex);
+            renderMonster(monsters[curMonsterIndex]);
         }
 
-        private void renderMonster(int monsterIndex)
+        private void renderMonster(Monster m, bool isPlayer = true)
         {
-            enemyImg.Image = monsters[monsterIndex].image;
+            if (isPlayer)
+            {
+                pNameLbl.Text = m.name;
+                pHpLbl.Text = m.status;
+                pHpBar.Maximum = m.maxHp;
+                pHpBar.Value = m.curHp;
+                pPicture.Image = m.image;
+            }
+            else
+            {
+                eNameLbl.Text = m.name;
+                eHpLbl.Text = m.status;
+                eHpBar.Maximum = m.maxHp;
+                eHpBar.Value = m.curHp;
+                ePicture.Image = m.image;
+            }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            logs.Items.Add("Tizio ha attaccato caio");
+            Monster m = monsters[curMonsterIndex];
+            m.curHp -= 20;
+            renderMonster(m);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

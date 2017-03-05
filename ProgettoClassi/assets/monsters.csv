@@ -1,5 +1,9 @@
 Type,Name,MaxHp,Damage,Special
 Monster,Abra,100,10,0
+Monster,BelloFigo,150,50,0
 Fire,Charmender,120,13,20
 Fire,Eevee,15,10,105
+Monster,GerryScotti,150,30,30
 Monster,Squirtle,120,10,12
+Fire,GigiDag,160,10,30
+Fire,TruceBaldazzi,160,30,10
